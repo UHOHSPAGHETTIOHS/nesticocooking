@@ -1094,7 +1094,7 @@
         return details;
     }
 
-               function copyOrderDetails() {
+                   function copyOrderDetails() {
         if (cart.length === 0) {
             showToast('Add items to your order first!');
             return;
@@ -1120,7 +1120,11 @@
         let items = '';
         cart.forEach(item => {
             const abbr = abbreviations[item.name] || item.name.substring(0, 3).toLowerCase();
-            items += item.quantity + 'x' + abbr;
+            if (item.quantity > 1) {
+                items += item.quantity + 'x' + abbr;
+            } else {
+                items += abbr;
+            }
             if (item.addons.length > 0) {
                 if (item.addons.includes('+Chicken')) items += '+chkn';
                 if (item.addons.includes('+Bacon')) items += '+bcn';
