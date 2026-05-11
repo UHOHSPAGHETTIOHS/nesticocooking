@@ -1094,12 +1094,34 @@
         return details;
     }
 
-    function copyOrderDetails() {
+        function copyOrderDetails() {
         if (cart.length === 0) {
             showToast('Add items to your order first!');
             return;
         }
-        const details = getOrderDetails();
+        
+        // Build order details manually
+        let details = '';
+        const name = document.getElementById('customerName').value.trim();
+        const email = document.getElementById('customerEmail').value.trim();
+        
+        if (name) details += 'Name: ' + name + '\n';
+        if (email) details += 'Email: ' + email + '\n';
+        if (name || email) details += '\n';
+        
+        details += 'Order:\n';
+        cart.forEach(item => {
+            details += item.quantity + 'x ' + item.name;
+            if (item.addons.length > 0) {
+                details += ' (' + item.addons.join(', ') + ')';
+            }
+            details += ' - $' + (item.price * item.quantity).toFixed(2) + '\n';
+        });
+        
+        const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+        details += '\nTotal: $' + total.toFixed(2);
+        details += '\n\n✨ Free bag of bark included! ✨';
+        
         navigator.clipboard.writeText(details).then(() => {
             showToast('Order details copied! Now proceed to Cash App.');
         }).catch(() => {
@@ -1114,8 +1136,6 @@
             return; 
         }
         e.preventDefault();
-        
-        // Show popup first
         showPaymentPopup();
     }
 
