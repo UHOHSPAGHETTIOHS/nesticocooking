@@ -718,14 +718,9 @@
         /* ========== MOBILE FIXES (only applies to screens under 768px) ========== */
 @media (max-width: 768px) {
     /* Move the annoying star away from "Savour" */
-    .star-1 { 
-        top: 80px !important; 
-        left: auto !important;
-        right: 25px !important; 
-    }
-    .star-2 { 
-        top: 15px !important; 
-        right: 60px !important; 
+       /* Hide or move ALL stars near the header on mobile */
+    .star-1, .star-2, .star-13 { 
+        display: none !important;
     }
 
     /* UN-STICK the cart — make it part of the page flow */
