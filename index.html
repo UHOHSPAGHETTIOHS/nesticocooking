@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nestico — Savour Every Moment</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Bungee&family=Patrick+Hand&display=swap"
+        rel="stylesheet"
+   >
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <style>
+        :root {
+            --bg-sky-top: #d4e4f5;
+            --bg-sky-bottom: #f0f2e8;
+            --orange-gold: #F5B842;
+            --orange-fill: #FFC857;
+            --pink-sparkle: #F08CC8;
+            --pink-light: #F9C1E0;
+            --dusty-blue: #A8BFCF;
+            --dusty-blue-light: #C4D7E3;
+            --bright-yellow: #FFD966;
+            --yellow-start: #FFEA70;
+            --brown-dark: #3A2A1A;
+            --brown-outline: #4A3525;
+            --black-outline: #1a1a1a;
+            --text-dark: #1a1a1a;
+            --white: #FFFEF9;
+            --lavender-mascot: #D5C4E0;
+            --checker-pink: #F4B8D0;
+            --checker-cream: #FDF4F0;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(180deg, #d4e4f5 0%, #eaf0e6 40%, #f0f2e8 100%);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+        }
+
+        /* ========== CLOUDY BACKGROUND ========== */
+        .cloud {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4);
+            pointer-events: none;
+            z-index: 0;
+            will-change: transform;
+        }
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: inherit;
+            border-radius: 50%;
+        }
+        .cloud::before {
+            width: 50%;
+            height: 60%;
+            top: -30%;
+            left: 15%;
+        }
+        .cloud::after {
+            width: 70%;
+            height: 55%;
+            top: -25%;
+            left: 40%;
+        }
+        .cloud1 { width: 220px; height: 120px; top: 10%; left: 5%; animation: drift1 22s linear infinite; }
+        .cloud2 { width: 180px; height: 100px; top: 25%; right: 8%; animation: drift2 26s linear infinite; }
+        .cloud3 { width: 260px; height: 140px; top: 60%; left: 50%; animation: drift3 30s linear infinite; }
+        .cloud4 { width: 150px; height: 90px; top: 80%; left: 12%; animation: drift1 18s linear infinite; }
+        .cloud5 { width: 200px; height: 110px; top: 45%; right: 20%; animation: drift2 24s linear infinite; }
+
+        @keyframes drift1 {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(40px); }
+        }
+        @keyframes drift2 {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-30px); }
+        }
+        @keyframes drift3 {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50px); }
+        }
+
+        /* ========== SPARKLE STARS ========== */
+        .sparkle-star {
+            position: absolute;
+            z-index: 2;
+            pointer-events: none;
+            animation: floatStar 3s ease-in-out infinite;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+        }
+        .star-1 { top: 30px; left: 20px; width: 28px; height: 28px; animation-delay: 0s; }
+        .star-2 { top: 40px; right: 25px; width: 24px; height: 24px; animation-delay: 0.7s; }
+        .star-3 { top: 200px; left: 55%; width: 30px; height: 30px; animation-delay: 1.2s; }
+        .star-4 { top: 150px; left: 8%; width: 22px; height: 22px; animation-delay: 0.3s; }
+        .star-5 { top: 400px; right: 5%; width: 26px; height: 26px; animation-delay: 1.6s; }
+        .star-6 { top: 350px; left: 45%; width: 20px; height: 20px; animation-delay: 0.9s; }
+        .star-7 { top: 550px; left: 12%; width: 28px; height: 28px; animation-delay: 2s; }
+        .star-8 { top: 650px; right: 18%; width: 23px; height: 23px; animation-delay: 0.5s; }
+        .star-9 { top: 750px; left: 35%; width: 18px; height: 18px; animation-delay: 1.8s; }
+        .star-10 { top: 100px; left: 80%; width: 25px; height: 25px; animation-delay: 1.3s; }
+        .star-11 { top: 480px; left: 70%; width: 21px; height: 21px; animation-delay: 0.2s; }
+        .star-12 { top: 820px; left: 55%; width: 29px; height: 29px; animation-delay: 2.2s; }
+        .star-13 { top: 20px; left: 90%; width: 20px; height: 20px; animation-delay: 1.1s; }
+        .star-14 { top: 320px; left: 18%; width: 24px; height: 24px; animation-delay: 0.6s; }
+        .star-15 { top: 600px; left: 80%; width: 27px; height: 27px; animation-delay: 0.4s; }
+
+        @keyframes floatStar {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.85; }
+            50% { transform: translateY(-14px) rotate(4deg); opacity: 1; }
+        }
+
+        /* ========== MAIN CONTAINER ========== */
+        .menu-page {
+            position: relative;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 30px 25px 60px;
+            z-index: 3;
+        }
+
+        /* Header */
+        .header-cluster {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+        .brand-nestico {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            letter-spacing: 1.5px;
+            color: #C8943E;
+            -webkit-text-stroke: 3px var(--brown-outline);
+            paint-order: stroke fill;
+            text-shadow: 4px 4px 0 rgba(58, 42, 26, 0.25);
+            line-height: 1;
+        }
+        .word-menu {
+            font-family: 'Fredoka One', 'Bungee', 'Arial Black', sans-serif;
+            font-weight: 700;
+            font-size: clamp(4.5rem, 10vw, 7rem);
+            letter-spacing: 2px;
+            color: var(--orange-fill);
+            -webkit-text-stroke: 5px var(--black-outline);
+            paint-order: stroke fill;
+            text-shadow: 5px 6px 0 rgba(0, 0, 0, 0.2);
+            line-height: 0.8;
+            margin-bottom: 8px;
+        }
+        .tagline {
+            font-family: 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.4rem;
+            color: #2a2a2a;
+            letter-spacing: 0.8px;
+        }
+
+        /* ========== TWO COLUMN LAYOUT ========== */
+        .menu-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .col-left {
+            flex: 1 1 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .col-right {
+            flex: 1 1 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* ========== SECTION CARDS ========== */
+        .section-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            border: 3.5px solid var(--black-outline);
+            padding: 28px 22px;
+            box-shadow: 6px 8px 0 rgba(0,0,0,0.12);
+            position: relative;
+        }
+
+        /* Starters */
+        .starters-section {
+            background: var(--bright-yellow);
+        }
+        .starters-header {
+            font-family: 'Fredoka One', 'Bungee', sans-serif;
+            font-weight: 700;
+            font-size: 2.4rem;
+            color: var(--orange-fill);
+            -webkit-text-stroke: 2.8px var(--black-outline);
+            paint-order: stroke fill;
+            text-align: center;
+            margin: -48px auto 16px;
+            background: var(--pink-light);
+            display: inline-block;
+            padding: 6px 30px;
+            border-radius: 30px;
+            border: 2.5px solid var(--black-outline);
+            box-shadow: 3px 4px 0 rgba(0,0,0,0.1);
+        }
+        .starter-item {
+            margin-bottom: 22px;
+        }
+        .starter-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #3A5568;
+        }
+        .starter-desc {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.2rem;
+            color: #4a4a4a;
+            margin: 6px 0;
+        }
+        .starter-price {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #3A5568;
+            text-align: right;
+            margin: 8px 0;
+        }
+        .starter-add-btn {
+            background: #fff;
+            border: 3px solid var(--black-outline);
+            border-radius: 8px;
+            padding: 8px 20px;
+            font-family: 'Fredoka One', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 3px 4px 0 rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .starter-add-btn:hover {
+            background: var(--orange-fill);
+            transform: translateY(-1px);
+        }
+
+        /* Handcrafted Filler */
+        .filler-banner {
+            text-align: center;
+            padding: 15px 0;
+            position: relative;
+        }
+        .filler-banner span {
+            font-family: 'Fredoka One', sans-serif;
+            font-size: 1.6rem;
+            color: var(--pink-sparkle);
+            -webkit-text-stroke: 2px var(--black-outline);
+            paint-order: stroke fill;
+            background: rgba(255,255,255,0.6);
+            padding: 0 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        /* Main Dishes */
+        .main-dishes-header {
+            font-family: 'Fredoka One', 'Bungee', sans-serif;
+            font-weight: 700;
+            font-size: 2.4rem;
+            color: var(--orange-fill);
+            -webkit-text-stroke: 2.8px var(--black-outline);
+            paint-order: stroke fill;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .mascot-container {
+            flex-shrink: 0;
+        }
+        .mascot-body {
+            width: 72px;
+            height: 66px;
+            background: var(--lavender-mascot);
+            border: 3.5px solid var(--black-outline);
+            border-radius: 18px 20px 14px 12px;
+            position: relative;
+            box-shadow: 4px 5px 0 rgba(0,0,0,0.1);
+        }
+        .mascot-face {
+            width: 34px;
+            height: 34px;
+            background: #F7E98E;
+            border: 3px solid var(--black-outline);
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .mascot-eye { width: 6px; height: 6px; background: var(--black-outline); border-radius: 50%; position: absolute; top: 11px; }
+        .mascot-eye.left { left: 8px; }
+        .mascot-eye.right { right: 8px; }
+        .mascot-mouth { width: 10px; height: 6px; border-bottom: 3px solid var(--black-outline); border-radius: 0 0 50% 50%; position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%); }
+        .mascot-arm { position: absolute; width: 5px; height: 20px; background: var(--black-outline); border-radius: 2px; }
+        .mascot-arm.waving { top: -14px; right: 8px; height: 24px; transform: rotate(-40deg); transform-origin: bottom center; animation: waveArm 1.5s ease-in-out infinite; }
+        .mascot-arm.resting { bottom: -12px; left: 16px; height: 16px; transform: rotate(15deg); }
+        .mascot-leg { position: absolute; width: 5px; height: 17px; background: var(--black-outline); border-radius: 2px; bottom: -15px; }
+        .mascot-leg.left { left: 16px; transform: rotate(-5deg); }
+        .mascot-leg.right { right: 16px; transform: rotate(5deg); }
+        @keyframes waveArm { 0%,100% { transform: rotate(-40deg); } 50% { transform: rotate(-65deg); } }
+
+        .dish-title-row {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .dish-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+            white-space: nowrap;
+        }
+        .dish-dots {
+            flex: 1;
+            border-bottom: 2px dotted #555;
+            min-width: 20px;
+            align-self: flex-end;
+            margin-bottom: 3px;
+        }
+        .dish-price {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+        .dish-desc {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.2rem;
+            color: #3a3a3a;
+            margin-top: 6px;
+        }
+        .addon-check-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #4a3a2a;
+            margin: 8px 0;
+        }
+        .add-btn-dish {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 10px 24px;
+            font-family: 'Fredoka One', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            background: var(--orange-fill);
+            color: #1a1a1a;
+            border: 3px solid var(--black-outline);
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 3px 4px 0 rgba(0,0,0,0.15);
+            transition: all 0.2s;
+        }
+        .add-btn-dish:hover {
+            background: #E5A83A;
+            transform: translateY(-1px);
+        }
+
+        /* Drinks */
+        .drinks-section {
+            background: rgba(255,255,255,0.5);
+        }
+        .drinks-header-oval {
+            display: inline-block;
+            background: var(--pink-sparkle);
+            border: 3px solid var(--black-outline);
+            border-radius: 50px;
+            padding: 10px 34px;
+            font-family: 'Fredoka One', 'Bungee', sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            color: var(--orange-fill);
+            -webkit-text-stroke: 2.5px var(--black-outline);
+            paint-order: stroke fill;
+            margin-bottom: 20px;
+            box-shadow: 4px 5px 0 rgba(0,0,0,0.1);
+        }
+        .drink-item {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .drink-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-dark);
+            white-space: nowrap;
+        }
+        .drink-dots {
+            flex: 1;
+            border-bottom: 2px dotted #555;
+            min-width: 16px;
+            align-self: flex-end;
+            margin-bottom: 3px;
+        }
+        .drink-price {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        .drink-add-btn {
+            padding: 6px 16px;
+            background: #fff;
+            border: 2.5px solid var(--black-outline);
+            border-radius: 6px;
+            font-family: 'Fredoka One', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 2px 3px 0 rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .drink-add-btn:hover {
+            background: var(--orange-fill);
+        }
+
+        /* Dessert */
+        .dessert-section {
+            background: var(--dusty-blue-light);
+        }
+        .dessert-banner {
+            background: repeating-conic-gradient(var(--checker-pink) 0% 25%, var(--checker-cream) 0% 50%) 50% / 20px 20px;
+            border-bottom: 3px solid var(--black-outline);
+            border-radius: 24px 24px 0 0;
+            padding: 14px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .dessert-header {
+            font-family: 'Fredoka One', 'Bungee', sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            color: var(--orange-fill);
+            -webkit-text-stroke: 2.5px var(--black-outline);
+            paint-order: stroke fill;
+            background: rgba(255,255,255,0.8);
+            display: inline-block;
+            padding: 6px 30px;
+            border-radius: 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+        }
+        .dessert-inner {
+            padding: 0 18px 8px;
+        }
+        .dessert-item {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+        .dessert-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-dark);
+            white-space: nowrap;
+        }
+        .dessert-dots {
+            flex: 1;
+            border-bottom: 2px dotted #555;
+            min-width: 16px;
+            align-self: flex-end;
+            margin-bottom: 3px;
+        }
+        .dessert-price {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        .dessert-add-btn {
+            margin-top: 6px;
+            padding: 8px 20px;
+            background: #fff;
+            border: 3px solid var(--black-outline);
+            border-radius: 6px;
+            font-family: 'Fredoka One', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 3px 4px 0 rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .dessert-add-btn:hover {
+            background: var(--orange-fill);
+        }
+
+        /* ========== CART ========== */
+        .cart-section {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: var(--white);
+            border: 3.5px solid var(--black-outline);
+            border-radius: 24px;
+            padding: 20px 22px;
+            max-width: 360px;
+            width: auto;
+            box-shadow: 8px 10px 0 rgba(0,0,0,0.2);
+        }
+        .cart-mini-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        .cart-count-dot {
+            background: var(--pink-sparkle);
+            color: #1a1a1a;
+            font-weight: 700;
+            font-size: 0.85rem;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2.5px solid var(--black-outline);
+        }
+        .cart-items-mini {
+            list-style: none;
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            margin: 8px 0 12px;
+        }
+        .cart-items-mini li {
+            padding: 8px 0;
+            border-bottom: 1px dotted #ccc;
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            align-items: center;
+        }
+        .cart-total-mini {
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        .cashapp-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: #00D64F;
+            color: #fff;
+            border: 2.5px solid #005a20;
+            border-radius: 12px;
+            font-family: 'Fredoka One', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 4px 5px 0 rgba(0,0,0,0.2);
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+        .cashapp-btn:hover {
+            background: #00C046;
+            transform: translateY(-1px);
+        }
+        .cashapp-btn:disabled {
+            background: #aaa;
+            border-color: #777;
+            cursor: default;
+            box-shadow: none;
+        }
+        .btn-remove-mini {
+            background: none;
+            border: none;
+            color: #c0392b;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0 4px;
+        }
+        .btn-qty-mini {
+            background: #f0f0f0;
+            border: 1.5px solid #999;
+            border-radius: 4px;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 3px;
+        }
+        .copy-order-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #fff;
+            border: 2.5px solid var(--black-outline);
+            border-radius: 10px;
+            font-family: 'Fredoka One', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #1a1a1a;
+            cursor: pointer;
+            box-shadow: 3px 4px 0 rgba(0,0,0,0.1);
+            transition: all 0.2s;
+            margin-top: 6px;
+        }
+        .copy-order-btn:hover {
+            background: var(--pink-light);
+        }
+        .cashapp-note {
+            text-align: center;
+            font-size: 0.7rem;
+            margin-top: 6px;
+            opacity: 0.8;
+        }
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .toast {
+            background: #2a2a2a;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 2px solid var(--black-outline);
+            animation: toastBounce 0.5s ease-out, toastFade 0.4s ease-in 2s forwards;
+            pointer-events: none;
+        }
+        @keyframes toastBounce {
+            from { opacity:0; transform: translateY(-20px) scale(0.8); }
+            to { opacity:1; transform: translateY(0) scale(1); }
+        }
+        @keyframes toastFade {
+            from { opacity:1; }
+            to { opacity:0; transform: translateY(-10px); }
+        }
+
+        @media (max-width: 900px) {
+            .menu-columns {
+                flex-direction: column;
+            }
+            .cart-section {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cloudy background -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+    <div class="cloud cloud4"></div>
+    <div class="cloud cloud5"></div>
+
+    <!-- Sparkle stars -->
+    <div class="sparkle-star star-1"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#F08CC8" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+    <div class="sparkle-star star-2"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#F5B842" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+    <div class="sparkle-star star-3"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#A8BFCF" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+    <div class="sparkle-star star-4"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#F9C1E0" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+    <div class="sparkle-star star-5"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#FFD966" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+    <div class="sparkle-star star-6"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#F08CC8" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+    <div class="sparkle-star star-7"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#D5C4E0" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+    <div class="sparkle-star star-8"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#FFC857" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+    <div class="sparkle-star star-9"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#F4B8D0" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+    <div class="sparkle-star star-10"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#A8BFCF" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+    <div class="sparkle-star star-11"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#F5B842" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+    <div class="sparkle-star star-12"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#F08CC8" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+    <div class="sparkle-star star-13"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#FFD966" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+    <div class="sparkle-star star-14"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#D5C4E0" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+    <div class="sparkle-star star-15"><svg viewBox="0 0 40 40"><polygon points="20,2 24,15 38,16 26,25 29,39 20,31 11,39 14,25 2,16 16,15" fill="#F9C1E0" stroke="#1a1a1a" stroke-width="3"/></svg></div>
+
+    <div class="menu-page">
+        <!-- Header -->
+        <div class="header-cluster">
+            <div class="brand-nestico">NESTICO</div>
+            <div class="word-menu">MENU</div>
+            <div class="tagline">Savour Every Moment</div>
+        </div>
+
+        <!-- Two columns -->
+        <div class="menu-columns">
+            <!-- LEFT COLUMN: Starters + Filler + Drinks -->
+            <div class="col-left">
+                <div class="section-card starters-section">
+                    <div class="starters-header">STARTERS</div>
+                    <div class="starter-item">
+                        <div class="starter-name">FRIED PICKLES</div>
+                        <div class="starter-desc">Delicious beer battered fried pickles with a side of homemade ranch</div>
+                        <div class="starter-price">$7.00</div>
+                        <button class="starter-add-btn" onclick="addStarterToCart('Fried Pickles',7)">+ Add to Order</button>
+                    </div>
+                    <div class="starter-item">
+                        <div class="starter-name">LOADED POTATO SKINS</div>
+                        <div class="starter-desc">Russet potato with cheddar cheese, bacon, butter, sour cream and chives</div>
+                        <div class="starter-price">$8.00</div>
+                        <button class="starter-add-btn" onclick="addStarterToCart('Loaded Potato Skins',8)">+ Add to Order</button>
+                    </div>
+                </div>
+
+                <!-- Filler to eliminate empty gap -->
+                <div class="filler-banner">
+                    <span>✦ Handcrafted with Love ✦</span>
+                </div>
+
+                <div class="section-card drinks-section">
+                    <div class="drinks-header-oval">DRINKS</div>
+                    <div class="drink-item"><span class="drink-name">COKE</span><span class="drink-dots"></span><span class="drink-price">$2.00</span><button class="drink-add-btn" onclick="addDrinkToCart('Coke',2)">+</button></div>
+                    <div class="drink-item"><span class="drink-name">STRAWBERRY LEMONADE</span><span class="drink-dots"></span><span class="drink-price">$3.00</span><button class="drink-add-btn" onclick="addDrinkToCart('Strawberry Lemonade',3)">+</button></div>
+                    <div class="drink-item"><span class="drink-name">WATER BOTTLE</span><span class="drink-dots"></span><span class="drink-price">$3.00</span><button class="drink-add-btn" onclick="addDrinkToCart('Water Bottle',3)">+</button></div>
+                    <div class="drink-item"><span class="drink-name">JARRITOS</span><span class="drink-dots"></span><span class="drink-price">$3.00</span><button class="drink-add-btn" onclick="addDrinkToCart('Jarritos',3)">+</button></div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Main Dishes + Desserts -->
+            <div class="col-right">
+                <div class="section-card main-dishes-section">
+                    <div class="main-dishes-header">
+                        MAIN DISHES
+                        <div class="mascot-container">
+                            <div class="mascot-body">
+                                <div class="mascot-face">
+                                    <div class="mascot-eye left"></div>
+                                    <div class="mascot-eye right"></div>
+                                    <div class="mascot-mouth"></div>
+                                </div>
+                                <div class="mascot-arm waving"></div>
+                                <div class="mascot-arm resting"></div>
+                                <div class="mascot-leg left"></div>
+                                <div class="mascot-leg right"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom:24px;">
+                        <div class="dish-title-row"><span class="dish-name">CHICKEN ALFREDO</span><span class="dish-dots"></span><span class="dish-price">$17.00</span></div>
+                        <div class="dish-desc">Creamy alfredo sauce with onion, garlic, white wine, and cream cheese. Topped with chicken breast.</div>
+                        <button class="add-btn-dish" onclick="addToCart('chicken-alfredo','Chicken Alfredo',17)">+ Add to Order</button>
+                    </div>
+                    <div style="margin-bottom:24px;">
+                        <div class="dish-title-row"><span class="dish-name">LEMON PASTA</span><span class="dish-dots"></span><span class="dish-price">$12.00</span></div>
+                        <div class="dish-desc">A cream sauce with fresh squeezed lemon, onion, garlic, and a dash of crushed red pepper.</div>
+                        <div class="addon-check-row"><input type="checkbox" id="addChickenCheck" onchange="updateAddons()"> <label for="addChickenCheck">Add Chicken <strong>+$5</strong></label></div>
+                        <button class="add-btn-dish" onclick="addToCart('lemon-pasta','Lemon Pasta',12)">+ Add to Order</button>
+                    </div>
+                    <div style="margin-bottom:24px;">
+                        <div class="dish-title-row"><span class="dish-name">SMASH BURGER</span><span class="dish-dots"></span><span class="dish-price">$11.00</span></div>
+                        <div class="dish-desc">Classic smash burger with two beef patties, grilled onions, lettuce, tomato, pickle, and house sauce.</div>
+                        <div class="addon-check-row"><input type="checkbox" id="addBaconCheck" onchange="updateAddons()"> <label for="addBaconCheck">Add Bacon <strong>+$2</strong></label></div>
+                        <button class="add-btn-dish" onclick="addToCart('smash-burger','Smash Burger',11)">+ Add to Order</button>
+                    </div>
+                    <div>
+                        <div class="dish-title-row"><span class="dish-name">CRISPY BEEF TACOS (3)</span><span class="dish-dots"></span><span class="dish-price">$14.00</span></div>
+                        <div class="dish-desc">Three crispy beef tacos with onion and mozzarella with a side of jalapeño lime sauce.</div>
+                        <button class="add-btn-dish" onclick="addToCart('crispy-beef-tacos','Crispy Beef Tacos (3)',14)">+ Add to Order</button>
+                    </div>
+                </div>
+
+                <div class="section-card dessert-section">
+                    <div class="dessert-banner">
+                        <div class="dessert-header">DESSERT</div>
+                    </div>
+                    <div class="dessert-inner">
+                        <div style="margin-bottom:16px;">
+                            <div class="dessert-item"><span class="dessert-name">LAVA CAKE</span><span class="dessert-dots"></span><span class="dessert-price">$7.00</span></div>
+                            <button class="dessert-add-btn" onclick="addDessertToCart('Lava Cake',7)">+ Add to Order</button>
+                        </div>
+                        <div>
+                            <div class="dessert-item"><span class="dessert-name">PEACH COBBLER</span><span class="dessert-dots"></span><span class="dessert-price">$7.00</span></div>
+                            <button class="dessert-add-btn" onclick="addDessertToCart('Peach Cobbler',7)">+ Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Cart -->
+    <div class="cart-section" id="cartSection">
+        <div class="cart-mini-header">
+            Your Order <span class="cart-count-dot" id="cartCountBadge" style="display:none;">0</span>
+        </div>
+        <ul class="cart-items-mini" id="cartItemsMini"></ul>
+        <div class="cart-total-mini"><span>Total</span><span id="cartTotalMini">$0.00</span></div>
+        <a class="cashapp-btn" id="cashappBtn" href="#" target="_blank" rel="noopener" disabled onclick="handleCashAppPayment(event)">Pay with Cash App</a>
+        <div style="text-align:center; margin:8px 0; font-family: 'Patrick Hand', cursive; font-size:1.1rem; color:#3A2A1A; background: #FFD966; padding:6px 12px; border-radius:12px; border:2px solid #1a1a1a;">
+  ✨ All orders come with a <strong>free bag of bark!</strong> ✨
+</div>
+        <button class="copy-order-btn" onclick="copyOrderDetails()">Copy Order Details</button>
+        <div class="cashapp-note">
+            Cashtag: <strong id="displayCashtag">$YOUR_CASHTAG</strong><br>
+            <small>Tap "Pay with Cash App" – amount is pre‑filled. Then paste order details into the note.</small>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+<script>
+    // CONFIGURATION — Replace with your real Cash App $cashtag
+    const CASHAPP_CASHTAG = '$AnnaNestico';
+    document.getElementById('displayCashtag').textContent = CASHAPP_CASHTAG;
+
+    // Addon states
+    let lemonPastaHasChicken = false;
+    let smashBurgerHasBacon = false;
+    function updateAddons() {
+        lemonPastaHasChicken = document.getElementById('addChickenCheck').checked;
+        smashBurgerHasBacon = document.getElementById('addBaconCheck').checked;
+    }
+
+    // Cart management
+    let cart = [];
+
+    function addToCart(id, name, basePrice) {
+        let price = basePrice;
+        let addons = [];
+        if (id === 'lemon-pasta' && lemonPastaHasChicken) { price += 5; addons.push('+Chicken'); }
+        if (id === 'smash-burger' && smashBurgerHasBacon) { price += 2; addons.push('+Bacon'); }
+        const uniqueKey = id + '-' + addons.join('-');
+        const existing = cart.find(c => c.uniqueKey === uniqueKey);
+        if (existing) { existing.quantity++; }
+        else { cart.push({ id, uniqueKey, name, price, addons, quantity: 1 }); }
+        showToast('Added ' + name);
+        renderCart(); saveCart();
+    }
+
+    function addDrinkToCart(name, price) {
+        const key = 'drink-' + name.toLowerCase().replace(/\s/g,'-');
+        const existing = cart.find(c => c.uniqueKey === key);
+        if (existing) { existing.quantity++; }
+        else { cart.push({ id:'drink', uniqueKey: key, name, price, addons:[], quantity:1 }); }
+        showToast('Added ' + name);
+        renderCart(); saveCart();
+    }
+
+    function addStarterToCart(name, price) {
+        const key = 'starter-' + name.toLowerCase().replace(/\s/g,'-');
+        const existing = cart.find(c => c.uniqueKey === key);
+        if (existing) { existing.quantity++; }
+        else { cart.push({ id:'starter', uniqueKey: key, name, price, addons:[], quantity:1 }); }
+        showToast('Added ' + name);
+        renderCart(); saveCart();
+    }
+
+    function addDessertToCart(name, price) {
+        const key = 'dessert-' + name.toLowerCase().replace(/\s/g,'-');
+        const existing = cart.find(c => c.uniqueKey === key);
+        if (existing) { existing.quantity++; }
+        else { cart.push({ id:'dessert', uniqueKey: key, name, price, addons:[], quantity:1 }); }
+        showToast('Added ' + name);
+        renderCart(); saveCart();
+    }
+
+    function removeFromCart(uniqueKey) {
+        cart = cart.filter(i => i.uniqueKey !== uniqueKey);
+        renderCart(); saveCart();
+    }
+
+    function changeQty(uniqueKey, delta) {
+        const item = cart.find(i => i.uniqueKey === uniqueKey);
+        if (!item) return;
+        item.quantity += delta;
+        if (item.quantity <= 0) { removeFromCart(uniqueKey); return; }
+        renderCart(); saveCart();
+    }
+
+    function renderCart() {
+        const list = document.getElementById('cartItemsMini');
+        const badge = document.getElementById('cartCountBadge');
+        const totalEl = document.getElementById('cartTotalMini');
+        const btn = document.getElementById('cashappBtn');
+        list.innerHTML = '';
+        if (cart.length === 0) {
+            badge.style.display = 'none';
+            totalEl.textContent = '$0.00';
+            btn.setAttribute('disabled','disabled');
+            btn.style.pointerEvents = 'none'; btn.style.opacity = '0.5';
+            const li = document.createElement('li');
+            li.textContent = 'Your order is empty.';
+            li.style.justifyContent = 'center';
+            list.appendChild(li);
+        } else {
+            let totalItems = 0, totalPrice = 0;
+            cart.forEach(item => {
+                totalItems += item.quantity;
+                totalPrice += item.price * item.quantity;
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span style="flex:1;">${item.name} ${item.addons.length?'('+item.addons.join(',')+')':''}</span>
+                    <span style="display:flex;align-items:center;gap:4px;">
+                        <button class="btn-qty-mini" onclick="changeQty('${item.uniqueKey}',-1)">−</button>
+                        <span style="min-width:20px;text-align:center;">${item.quantity}</span>
+                        <button class="btn-qty-mini" onclick="changeQty('${item.uniqueKey}',1)">+</button>
+                        <button class="btn-remove-mini" onclick="removeFromCart('${item.uniqueKey}')">✕</button>
+                    </span>
+                    <span style="font-weight:700;">$${(item.price*item.quantity).toFixed(2)}</span>
+                `;
+                list.appendChild(li);
+            });
+            badge.style.display = 'inline-flex';
+            badge.textContent = totalItems;
+            totalEl.textContent = '$' + totalPrice.toFixed(2);
+            btn.removeAttribute('disabled');
+            btn.style.pointerEvents = 'auto'; btn.style.opacity = '1';
+        }
+    }
+
+    function copyOrderDetails() {
+        if (cart.length === 0) {
+            showToast('Add items to your order first!');
+            return;
+        }
+        let details = cart.map(item => `${item.quantity}x ${item.name}${item.addons.length ? ' ('+item.addons.join(',')+')' : ''} - $${(item.price*item.quantity).toFixed(2)}`).join('\n');
+        const total = cart.reduce((s,i) => s + i.price*i.quantity, 0);
+        details += `\n\nTotal: $${total.toFixed(2)}`;
+        navigator.clipboard.writeText(details).then(() => {
+            showToast('Order details copied! Paste into Cash App note.');
+        }).catch(() => {
+            showToast('Could not copy automatically. Please copy manually.');
+        });
+    }
+
+    function handleCashAppPayment(e) {
+        if (cart.length === 0) { e.preventDefault(); showToast('Add items first!'); return; }
+        const total = cart.reduce((s,i) => s + i.price*i.quantity, 0);
+        const amount = total.toFixed(2);
+        const cashtagClean = CASHAPP_CASHTAG.replace('$','').trim();
+        const url = `https://cash.app/$${cashtagClean}/${amount}`;
+        window.open(url, '_blank', 'noopener');
+        showToast(`Opening Cash App for $${amount} – amount is pre‑filled`);
+    }
+
+    function showToast(msg) {
+        const container = document.getElementById('toastContainer');
+        const t = document.createElement('div');
+        t.className = 'toast';
+        t.textContent = msg;
+        container.appendChild(t);
+        setTimeout(() => { if(t.parentNode) t.remove(); }, 2500);
+    }
+
+    function saveCart() {
+        try {
+            localStorage.setItem('nestico-sky-cart', JSON.stringify({
+                cart, lemonPastaHasChicken, smashBurgerHasBacon
+            }));
+        } catch(e){}
+    }
+    function loadCart() {
+        try {
+            const raw = localStorage.getItem('nestico-sky-cart');
+            if (!raw) return;
+            const data = JSON.parse(raw);
+            if (data.cart) cart = data.cart;
+            if (data.lemonPastaHasChicken !== undefined) {
+                lemonPastaHasChicken = data.lemonPastaHasChicken;
+                document.getElementById('addChickenCheck').checked = lemonPastaHasChicken;
+            }
+            if (data.smashBurgerHasBacon !== undefined) {
+                smashBurgerHasBacon = data.smashBurgerHasBacon;
+                document.getElementById('addBaconCheck').checked = smashBurgerHasBacon;
+            }
+            renderCart();
+        } catch(e){}
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadCart();
+        renderCart();
+    });
+    window.addEventListener('beforeunload', saveCart);
+    setInterval(saveCart, 5000);
+</script>
+</body>
+</html>
