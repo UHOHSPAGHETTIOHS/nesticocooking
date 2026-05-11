@@ -954,7 +954,7 @@
         </div>
         <ul class="cart-items-mini" id="cartItemsMini"></ul>
         <div style="margin:8px 0; display:flex; flex-direction:column; gap:6px;">
-    <input type="text" id="customerName" placeholder="Your name" style="font-family:'Patrick Hand',cursive; font-size:0.9rem; padding:6px 10px; border:2px solid #1a1a1a; border-radius:8px; width:100%;">
+    <input type="text" id="customerName" placeholder="First name" maxlength="8" style="font-family:'Patrick Hand',cursive; font-size:0.9rem; padding:6px 10px; border:2px solid #1a1a1a; border-radius:8px; width:100%;">
     <input type="email" id="customerEmail" placeholder="Your email" style="font-family:'Patrick Hand',cursive; font-size:0.9rem; padding:6px 10px; border:2px solid #1a1a1a; border-radius:8px; width:100%;">
 </div>
         <div class="cart-total-mini"><span>Total</span><span id="cartTotalMini">$0.00</span></div>
@@ -1100,37 +1100,43 @@
             return;
         }
         
-        // Abbreviation map
+        // Abbreviation map (all lowercase, no spaces)
         const abbreviations = {
-            'Chicken Alfredo': 'CA',
-            'Lemon Pasta': 'LP',
-            'Smash Burger': 'SB',
-            'Crispy Beef Tacos (3)': 'CBT',
-            'Coke': 'Coke',
-            'Strawberry Lemonade': 'SL',
-            'Water Bottle': 'WB',
-            'Jarritos': 'Jar',
-            'Fried Pickles': 'FP',
-            'Loaded Potato Skins': 'LPS',
-            'Lava Cake': 'LC',
-            'Peach Cobbler': 'PC'
+            'Chicken Alfredo': 'ca',
+            'Lemon Pasta': 'lp',
+            'Smash Burger': 'sb',
+            'Crispy Beef Tacos (3)': 'cbt',
+            'Coke': 'coke',
+            'Strawberry Lemonade': 'sl',
+            'Water Bottle': 'wb',
+            'Jarritos': 'jar',
+            'Fried Pickles': 'fp',
+            'Loaded Potato Skins': 'lps',
+            'Lava Cake': 'lc',
+            'Peach Cobbler': 'pc'
         };
         
-        const name = document.getElementById('customerName').value.trim() || 'Customer';
-        const email = document.getElementById('customerEmail').value.trim() || 'no-email';
+        const name = document.getElementById('customerName').value.trim().toLowerCase() || 'cust';
+        const email = document.getElementById('customerEmail').value.trim() || 'noemail';
         
-        let details = name + ' - ' + email + '\n';
+        let details = name + '-' + email + '\n';
         
         cart.forEach(item => {
-            const abbr = abbreviations[item.name] || item.name.substring(0, 3).toUpperCase();
-            details += item.quantity + 'x ' + abbr;
+            const abbr = abbreviations[item.name] || item.name.substring(0, 3).toLowerCase();
+            details += item.quantity + 'x' + abbr;
             if (item.addons.length > 0) {
-                details += ' (' + item.addons.join(', ') + ')';
+                // Short addon codes
+                const addonCodes = item.addons.map(a => {
+                    if (a === '+Chicken') return '+chkn';
+                    if (a === '+Bacon') return '+bcn';
+                    return '';
+                }).filter(Boolean).join('');
+                details += addonCodes;
             }
             details += '\n';
         });
         
-        navigator.clipboard.writeText(details).then(() => {
+        navigator.clipboard.writeText(details.trim()).then(() => {
             showToast('Order copied! Paste into Cash App note.');
         }).catch(() => {
             showToast('Could not copy. Please copy manually.');
