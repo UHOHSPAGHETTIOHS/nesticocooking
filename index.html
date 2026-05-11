@@ -311,54 +311,86 @@
         .mascot-container {
             flex-shrink: 0;
         }
-                /* ========== SUPER CUTE MASCOT ========== */
-        .mascot-body {
-            width: 70px;
-            height: 64px;
-            background: #F5D5E0;
-            border: 3.5px solid var(--black-outline);
-            border-radius: 20px 22px 16px 14px;
-            position: relative;
-            box-shadow: 4px 5px 0 rgba(0,0,0,0.08);
+                       /* ========== HAPPY BURGER MASCOT ========== */
+        .mascot-container {
+            flex-shrink: 0;
+            margin-top: -5px;
         }
-        .mascot-face {
-            width: 38px;
-            height: 34px;
-            background: #FFFBE6;
-            border: 3px solid var(--black-outline);
-            border-radius: 50%;
+        .mascot-body {
+            width: 65px;
+            height: 70px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: burgerBounce 2s ease-in-out infinite;
+        }
+        @keyframes burgerBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        /* Top bun */
+        .burger-bun-top {
+            width: 58px;
+            height: 22px;
+            background: #F4B842;
+            border: 3px solid #1a1a1a;
+            border-radius: 30px 30px 6px 6px;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 -2px 0 rgba(255,255,255,0.3) inset;
+        }
+        /* Sesame seeds */
+        .burger-bun-top::before {
+            content: '•  •';
             position: absolute;
-            top: 8px;
+            top: 4px;
             left: 50%;
             transform: translateX(-50%);
+            font-size: 10px;
+            color: #FFF8E1;
+            letter-spacing: 6px;
         }
-        /* Big sparkly eyes */
-        .mascot-eye {
-            width: 10px;
-            height: 12px;
+        /* Patty with face */
+        .burger-patty {
+            width: 52px;
+            height: 28px;
+            background: #6B3A2A;
+            border: 3px solid #1a1a1a;
+            border-radius: 4px;
+            position: relative;
+            z-index: 2;
+            margin-top: -4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Eyes on patty */
+        .burger-patty .mascot-eye {
+            width: 8px;
+            height: 9px;
             background: #1a1a1a;
             border-radius: 50%;
             position: absolute;
-            top: 9px;
+            top: 7px;
         }
-        .mascot-eye.left { left: 7px; }
-        .mascot-eye.right { right: 7px; }
-        /* Eye shine */
-        .mascot-eye::after {
+        .burger-patty .mascot-eye::after {
             content: '';
-            width: 4px;
-            height: 4px;
+            width: 3px;
+            height: 3px;
             background: #fff;
             border-radius: 50%;
             position: absolute;
             top: 2px;
             left: 2px;
         }
-        /* Happy smile */
-        .mascot-mouth {
-            width: 14px;
-            height: 8px;
-            border-bottom: 3px solid #1a1a1a;
+        .burger-patty .mascot-eye.left { left: 10px; }
+        .burger-patty .mascot-eye.right { right: 10px; }
+        /* Happy mouth */
+        .burger-patty .mascot-mouth {
+            width: 12px;
+            height: 6px;
+            border-bottom: 2.5px solid #FFE0A0;
             border-radius: 0 0 50% 50%;
             position: absolute;
             bottom: 5px;
@@ -366,81 +398,39 @@
             transform: translateX(-50%);
         }
         /* Rosy cheeks */
-        .mascot-cheek {
-            width: 7px;
-            height: 5px;
-            background: #FFB5C2;
+        .burger-patty .mascot-cheek {
+            width: 6px;
+            height: 4px;
+            background: #E8917E;
             border-radius: 50%;
             position: absolute;
-            top: 14px;
-            opacity: 0.7;
+            top: 12px;
+            opacity: 0.8;
         }
-        .mascot-cheek.left { left: 2px; }
-        .mascot-cheek.right { right: 2px; }
-        /* Arms */
-        .mascot-arm {
-            position: absolute;
-            width: 5px;
-            height: 18px;
-            background: #F5D5E0;
-            border: 2.5px solid var(--black-outline);
-            border-radius: 3px;
-        }
-        .mascot-arm.waving {
-            top: -10px;
-            right: 8px;
-            height: 20px;
-            transform: rotate(-35deg);
-            transform-origin: bottom center;
-            animation: waveArm 1.2s ease-in-out infinite;
-        }
-        .mascot-arm.resting {
-            bottom: -10px;
-            left: 16px;
-            height: 14px;
-            transform: rotate(15deg);
-        }
-        /* Tiny hands */
-        .mascot-arm::after {
-            content: '';
-            width: 8px;
+        .burger-patty .mascot-cheek.left { left: 4px; }
+        .burger-patty .mascot-cheek.right { right: 4px; }
+        /* Lettuce */
+        .burger-lettuce {
+            width: 54px;
             height: 8px;
-            background: #F5D5E0;
-            border: 2.5px solid var(--black-outline);
-            border-radius: 50%;
-            position: absolute;
-            bottom: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        /* Legs */
-        .mascot-leg {
-            position: absolute;
-            width: 5px;
-            height: 15px;
-            background: #F5D5E0;
-            border: 2.5px solid var(--black-outline);
+            background: #7BC67E;
+            border: 2.5px solid #1a1a1a;
             border-radius: 3px;
-            bottom: -13px;
+            position: relative;
+            z-index: 2;
+            margin-top: -4px;
+            box-shadow: 0 1px 0 #5DA55F inset;
         }
-        .mascot-leg.left { left: 16px; transform: rotate(-5deg); }
-        .mascot-leg.right { right: 16px; transform: rotate(5deg); }
-        /* Tiny feet */
-        .mascot-leg::after {
-            content: '';
-            width: 9px;
-            height: 6px;
-            background: #F5D5E0;
-            border: 2.5px solid var(--black-outline);
-            border-radius: 50%;
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        @keyframes waveArm {
-            0%, 100% { transform: rotate(-35deg); }
-            50% { transform: rotate(-55deg); }
+        /* Bottom bun */
+        .burger-bun-bottom {
+            width: 56px;
+            height: 14px;
+            background: #F4B842;
+            border: 3px solid #1a1a1a;
+            border-radius: 4px 4px 18px 18px;
+            position: relative;
+            z-index: 1;
+            margin-top: -3px;
         }
 
         .dish-title-row {
@@ -990,17 +980,22 @@
                 <div class="section-card main-dishes-section">
                     <div class="main-dishes-header">
                         MAIN DISHES
-                        <div class="mascot-container">
+                                               <div class="mascot-container">
                             <div class="mascot-body">
-                                <div class="mascot-face">
+                                <!-- Top bun -->
+                                <div class="burger-bun-top"></div>
+                                <!-- Face on the patty -->
+                                <div class="burger-patty">
                                     <div class="mascot-eye left"></div>
                                     <div class="mascot-eye right"></div>
                                     <div class="mascot-mouth"></div>
+                                    <div class="mascot-cheek left"></div>
+                                    <div class="mascot-cheek right"></div>
                                 </div>
-                                <div class="mascot-arm waving"></div>
-                                <div class="mascot-arm resting"></div>
-                                <div class="mascot-leg left"></div>
-                                <div class="mascot-leg right"></div>
+                                <!-- Lettuce peeking out -->
+                                <div class="burger-lettuce"></div>
+                                <!-- Bottom bun -->
+                                <div class="burger-bun-bottom"></div>
                             </div>
                         </div>
                     </div>
