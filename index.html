@@ -1094,41 +1094,48 @@
         return details;
     }
 
-        function copyOrderDetails() {
+           function copyOrderDetails() {
         if (cart.length === 0) {
             showToast('Add items to your order first!');
             return;
         }
         
-        // Build order details manually
-        let details = '';
-        const name = document.getElementById('customerName').value.trim();
-        const email = document.getElementById('customerEmail').value.trim();
+        // Abbreviation map
+        const abbreviations = {
+            'Chicken Alfredo': 'CA',
+            'Lemon Pasta': 'LP',
+            'Smash Burger': 'SB',
+            'Crispy Beef Tacos (3)': 'CBT',
+            'Coke': 'Coke',
+            'Strawberry Lemonade': 'SL',
+            'Water Bottle': 'WB',
+            'Jarritos': 'Jar',
+            'Fried Pickles': 'FP',
+            'Loaded Potato Skins': 'LPS',
+            'Lava Cake': 'LC',
+            'Peach Cobbler': 'PC'
+        };
         
-        if (name) details += 'Name: ' + name + '\n';
-        if (email) details += 'Email: ' + email + '\n';
-        if (name || email) details += '\n';
+        const name = document.getElementById('customerName').value.trim() || 'Customer';
+        const email = document.getElementById('customerEmail').value.trim() || 'no-email';
         
-        details += 'Order:\n';
+        let details = name + ' - ' + email + '\n';
+        
         cart.forEach(item => {
-            details += item.quantity + 'x ' + item.name;
+            const abbr = abbreviations[item.name] || item.name.substring(0, 3).toUpperCase();
+            details += item.quantity + 'x ' + abbr;
             if (item.addons.length > 0) {
                 details += ' (' + item.addons.join(', ') + ')';
             }
-            details += ' - $' + (item.price * item.quantity).toFixed(2) + '\n';
+            details += '\n';
         });
-        
-        const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
-        details += '\nTotal: $' + total.toFixed(2);
-        details += '\n\n✨ Free bag of bark included! ✨';
         
         navigator.clipboard.writeText(details).then(() => {
-            showToast('Order details copied! Now proceed to Cash App.');
+            showToast('Order copied! Paste into Cash App note.');
         }).catch(() => {
-            showToast('Could not copy automatically. Please copy manually.');
+            showToast('Could not copy. Please copy manually.');
         });
     }
-
     function handleCashAppPayment(e) {
         if (cart.length === 0) { 
             e.preventDefault(); 
