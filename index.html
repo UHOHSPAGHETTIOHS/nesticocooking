@@ -937,6 +937,10 @@
             Your Order <span class="cart-count-dot" id="cartCountBadge" style="display:none;">0</span>
         </div>
         <ul class="cart-items-mini" id="cartItemsMini"></ul>
+        <div style="margin:8px 0; display:flex; flex-direction:column; gap:6px;">
+    <input type="text" id="customerName" placeholder="Your name" style="font-family:'Patrick Hand',cursive; font-size:0.9rem; padding:6px 10px; border:2px solid #1a1a1a; border-radius:8px; width:100%;">
+    <input type="email" id="customerEmail" placeholder="Your email" style="font-family:'Patrick Hand',cursive; font-size:0.9rem; padding:6px 10px; border:2px solid #1a1a1a; border-radius:8px; width:100%;">
+</div>
         <div class="cart-total-mini"><span>Total</span><span id="cartTotalMini">$0.00</span></div>
         <a class="cashapp-btn" id="cashappBtn" href="#" target="_blank" rel="noopener" disabled onclick="handleCashAppPayment(event)">Pay with Cash App</a>
         <div style="text-align:center; margin:8px 0; font-family: 'Patrick Hand', cursive; font-size:1.1rem; color:#3A2A1A; background: #FFD966; padding:6px 12px; border-radius:12px; border:2px solid #1a1a1a;">
@@ -953,7 +957,7 @@
 
 <script>
     // CONFIGURATION — Replace with your real Cash App $cashtag
-    const CASHAPP_CASHTAG = '$AnnaNestico';
+    const CASHAPP_CASHTAG = '$YOUR_CASHTAG';
     document.getElementById('displayCashtag').textContent = CASHAPP_CASHTAG;
 
     // Addon states
@@ -1061,29 +1065,97 @@
         }
     }
 
+    function getOrderDetails() {
+        let details = '';
+        const name = document.getElementById('customerName').value.trim();
+        const email = document.getElementById('customerEmail').value.trim();
+        if (name) details += `Name: ${name}\n`;
+        if (email) details += `Email: ${email}\n`;
+        if (name || email) details += '\n';
+        details += cart.map(item => `${item.quantity}x ${item.name}${item.addons.length ? ' ('+item.addons.join(',')+')' : ''} - $${(item.price*item.quantity).toFixed(2)}`).join('\n');
+        const total = cart.reduce((s,i) => s + i.price*i.quantity, 0);
+        details += `\n\nTotal: $${total.toFixed(2)}`;
+        return details;
+    }
+
     function copyOrderDetails() {
         if (cart.length === 0) {
             showToast('Add items to your order first!');
             return;
         }
-        let details = cart.map(item => `${item.quantity}x ${item.name}${item.addons.length ? ' ('+item.addons.join(',')+')' : ''} - $${(item.price*item.quantity).toFixed(2)}`).join('\n');
-        const total = cart.reduce((s,i) => s + i.price*i.quantity, 0);
-        details += `\n\nTotal: $${total.toFixed(2)}`;
+        const details = getOrderDetails();
         navigator.clipboard.writeText(details).then(() => {
-            showToast('Order details copied! Paste into Cash App note.');
+            showToast('Order details copied! Now proceed to Cash App.');
         }).catch(() => {
             showToast('Could not copy automatically. Please copy manually.');
         });
     }
 
     function handleCashAppPayment(e) {
-        if (cart.length === 0) { e.preventDefault(); showToast('Add items first!'); return; }
-        const total = cart.reduce((s,i) => s + i.price*i.quantity, 0);
-        const amount = total.toFixed(2);
-        const cashtagClean = CASHAPP_CASHTAG.replace('$','').trim();
-        const url = `https://cash.app/$${cashtagClean}/${amount}`;
-        window.open(url, '_blank', 'noopener');
-        showToast(`Opening Cash App for $${amount} – amount is pre‑filled`);
+        if (cart.length === 0) { 
+            e.preventDefault(); 
+            showToast('Add items first!'); 
+            return; 
+        }
+        e.preventDefault();
+        
+        // Show popup first
+        showPaymentPopup();
+    }
+
+    function showPaymentPopup() {
+        // Remove any existing popup
+        const existing = document.getElementById('paymentPopup');
+        if (existing) existing.remove();
+
+        const popup = document.createElement('div');
+        popup.id = 'paymentPopup';
+        popup.style.cssText = `
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.6); z-index: 10000;
+            display: flex; align-items: center; justify-content: center;
+        `;
+        popup.innerHTML = `
+            <div style="
+                background: #FFFEF9; border: 4px solid #1a1a1a; border-radius: 24px;
+                padding: 24px 22px; max-width: 380px; width: 90%;
+                text-align: center; font-family: 'Inter', sans-serif;
+                box-shadow: 8px 10px 0 rgba(0,0,0,0.2);
+            ">
+                <div style="font-family:'Fredoka One',sans-serif; font-size:1.4rem; color:#F5B842; -webkit-text-stroke:1.5px #1a1a1a; paint-order:stroke fill; margin-bottom:12px;">
+                    Almost there!
+                </div>
+                <p style="font-size:0.9rem; margin-bottom:10px; color:#3A2A1A;">
+                    <strong>Step 1:</strong> Click below to copy your order details (with name & email).
+                </p>
+                <button onclick="copyOrderDetails(); this.style.background='#FFD966'; this.textContent='Copied!';" 
+                    style="width:100%; padding:10px; font-family:'Fredoka One',sans-serif; font-size:0.9rem;
+                    background:#fff; border:2.5px solid #1a1a1a; border-radius:10px; cursor:pointer;
+                    box-shadow:3px 4px 0 rgba(0,0,0,0.1); margin-bottom:12px;">
+                    Copy Order Details
+                </button>
+                <p style="font-size:0.85rem; margin-bottom:12px; color:#3A2A1A;">
+                    <strong>Step 2:</strong> Then tap below to open Cash App.<br>
+                    <span style="font-size:0.7rem; opacity:0.7;">Paste your order into the note field after paying!</span>
+                </p>
+                <button id="proceedToCashapp" onclick="
+                    const total = ${cart.reduce((s,i) => s + i.price*i.quantity, 0).toFixed(2)};
+                    const cashtag = '${CASHAPP_CASHTAG.replace('$','').trim()}';
+                    window.open('https://cash.app/$' + cashtag + '/' + total, '_blank', 'noopener');
+                    document.getElementById('paymentPopup').remove();
+                    showToast('Opening Cash App — paste your order details!');
+                " style="width:100%; padding:14px; font-family:'Fredoka One',sans-serif; font-size:1rem;
+                    background:#00D64F; color:#fff; border:2.5px solid #005a20; border-radius:12px;
+                    cursor:pointer; box-shadow:4px 5px 0 rgba(0,0,0,0.2);">
+                    Pay with Cash App
+                </button>
+                <button onclick="document.getElementById('paymentPopup').remove();" 
+                    style="margin-top:8px; background:none; border:none; color:#888; cursor:pointer; font-size:0.8rem;">
+                    Cancel
+                </button>
+            </div>
+        `;
+        document.body.appendChild(popup);
     }
 
     function showToast(msg) {
