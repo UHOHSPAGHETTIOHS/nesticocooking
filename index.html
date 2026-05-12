@@ -633,7 +633,6 @@
             background: #FFD2B0;
             transform: translateY(-1px);
         }
-
         /* ========== CART ========== */
         .cart-section {
             position: fixed;
@@ -1055,7 +1054,7 @@
         <ul class="cart-items-mini" id="cartItemsMini"></ul>
         <div style="margin:8px 0; display:flex; flex-direction:column; gap:6px;">
     <input type="text" id="customerName" placeholder="First name" maxlength="8" style="font-family:'Patrick Hand',cursive; font-size:0.9rem; padding:6px 10px; border:2px solid #1a1a1a; border-radius:8px; width:100%;">
-    <input type="email" id="customerEmail" placeholder="Your email" style="font-family:'Patrick Hand',cursive; font-size:0.9rem; padding:6px 10px; border:2px solid #1a1a1a; border-radius:8px; width:100%;">
+    <input type="email" id="customerEmail" placeholder="Your email (required)" required style="font-family:'Patrick Hand',cursive; font-size:0.9rem; padding:6px 10px; border:2px solid #1a1a1a; border-radius:8px; width:100%;">
 </div>
         <div class="cart-total-mini"><span>Total</span><span id="cartTotalMini">$0.00</span></div>
         <a class="cashapp-btn" id="cashappBtn" href="#" target="_blank" rel="noopener" disabled onclick="handleCashAppPayment(event)">Pay with Cash App</a>
@@ -1239,12 +1238,29 @@
             showToast('Could not copy. Please copy manually.');
         });
     }
-    function handleCashAppPayment(e) {
+       function handleCashAppPayment(e) {
         if (cart.length === 0) { 
             e.preventDefault(); 
             showToast('Add items first!'); 
             return; 
         }
+        
+        const email = document.getElementById('customerEmail').value.trim();
+        if (!email) {
+            e.preventDefault();
+            document.getElementById('customerEmail').style.border = '3px solid #E85D5D';
+            document.getElementById('customerEmail').style.background = '#FFF0F0';
+            document.getElementById('customerEmail').placeholder = 'Email required!';
+            document.getElementById('customerEmail').focus();
+            showToast('Please enter your email first!');
+            setTimeout(() => {
+                document.getElementById('customerEmail').style.border = '2px solid #1a1a1a';
+                document.getElementById('customerEmail').style.background = '#fff';
+                document.getElementById('customerEmail').placeholder = 'Your email (required)';
+            }, 2000);
+            return;
+        }
+        
         e.preventDefault();
         showPaymentPopup();
     }
